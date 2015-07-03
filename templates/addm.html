@@ -1,0 +1,56 @@
+{% extends navigator.html %}
+{% block title %}
+添加设备
+{% end %}
+{% block content %}
+<div class='container'>
+<form enctype=multipart/form-data method="post">
+  <div class="form-group">
+    <label class="label label-primary"  for="namem">名称</label>
+    <input type="text" class="form-control" id="namem" name="namem" placeholder="输入设备的名称">
+  </div>
+  <div class="form-group">
+    <label class="label label-primary" for="positionm">位置</label>
+    <input type="text" class="form-control" id="positionm" name="positionm" placeholder="输入设备的位置">
+  </div>
+  <div class="form-group">
+    <label class="label label-primary" for="ipm">IP</label>
+    <input type="text" class="form-control" id="ipm" name="ipm" placeholder="输入设备的ip地址">
+  </div>
+    <div class="form-group">
+    <label class="label label-primary" for="portm">端口</label>
+    <input type="text" class="form-control" id="portm" name="portm" placeholder="输入设备的端口">
+  </div>
+  <div>
+  <label class="label label-primary" for="option1">协议</label>
+  <br>
+  <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-primary ">
+    <input type="radio" name="protocol" id="option1" value='TCP' autocomplete="off" > TCP
+  </label>
+  <label class="btn btn-primary">
+    <input type="radio" name="protocol" id="option2" value='UDP' autocomplete="off"> UDP
+  </label>
+  <label class="btn btn-primary">
+    <input type="radio" name="protocol" id="option3" value='MQTT' autocomplete="off"> MQTT
+  </label>
+    <label class="btn btn-primary">
+    <input type="radio" name="protocol" id="option4" value='COAP' autocomplete="off"> COAP
+  </label>
+      <label class="btn btn-primary">
+    <input type="radio" name="protocol" id="option5" value='XMPP' autocomplete="off"> XMPP
+  </label>
+</div>
+</div>
+
+<br>
+  <div class="form-group">
+    <label for="settingsm">上传配置文件</label>
+    <input type="file" id="settingm" name = "settingm" />
+    <p class="help-block">配置文件是json格式，包含了控制设备功能的指令</p>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-success">完成</button>
+</form>
+</div>
+{% end %}
