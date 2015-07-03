@@ -6,5 +6,5 @@
 * rethinkdb
 
 ##run
-* rethinkdb
+* rethinkdb(database:smartnode, table:mac)
 * python main.py
