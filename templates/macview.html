@@ -1,0 +1,20 @@
+{% extends "navigator.html" %}
+{% block title %}
+{{mac['mac_name']}}
+{% end %}
+{% block content %}
+<div class="btn-group-vertical" role="group" aria-label="control-group">
+{% for (k,v) in mac['control'].items() %}
+ <button type="button" class="btn btn-info" id={{k}}>{{k}}</button><br>
+
+<script>
+$("#{{k}}").click(function(){
+	$.post("/machine/{{mac['id']}}", {'command':'{{v}}', 'protocol':'{{mac['mac_protocol']}}', 'server':'{{mac['mac_ip']}}', 'port':{{mac['mac_port']}}});
+});
+</script>
+{% end %}
+</div>
+
+
+{% end %}
+

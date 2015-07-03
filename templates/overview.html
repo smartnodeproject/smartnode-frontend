@@ -1,0 +1,9 @@
+{% extends "navigator.html" %}
+{% block title %}
+概览
+{% end %}
+{% block content %}
+{% for i in name %}
+<a href="/machine/{{i['id']}}">{{i['mac_name']}}在{{i['mac_position']}}</a>
+{% end %}
+{% end %}

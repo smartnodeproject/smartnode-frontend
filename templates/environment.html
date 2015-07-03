@@ -1,0 +1,132 @@
+{% extends "navigator.html" %}
+{% block title %}
+环境
+{% end %}
+{% block header %}
+<script type="text/javascript" src='{{ static_url("js/highcharts.js") }}'></script>
+<script type="text/javascript" src='{{ static_url("js/exporting.js") }}'></script>
+ <script>
+$(function () {
+    var ws = new WebSocket("ws://" + window.location.host + "/environment/status")   
+    ws.onmessage = function(event) {
+		var fuck =  eval('('+event.data+')'); 
+		temp = fuck.temp;
+		lum = fuck.lum;
+		hum = fuck.hum;
+
+
+    var colors = Highcharts.getOptions().colors,
+        categories = ['温度', '湿度', '光照强度'],
+        name = '致盲',
+        data = [{
+                y: temp,
+                color: colors[0],
+            }, {
+                y: hum,
+                color: colors[1],
+            }, {
+                y: lum,
+                color: colors[2],
+            }];
+
+    function setChart(name, categories, data, color) {
+    ws.send("fuck");
+	chart.xAxis[0].setCategories(categories, false);
+	chart.series[0].remove(false);
+	chart.addSeries({
+		name: name,
+		data: data,
+		color: color || 'white'
+	}, false);
+	chart.redraw();
+    }
+
+    var chart = $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '环境'
+        },
+        subtitle: {
+            text: '看得到的温度，湿度和光照强度'
+        },
+        xAxis: {
+            categories: categories
+        },
+        yAxis: {
+            title: {
+                text: '他们并不是一个计量单位'
+            }
+        },
+        plotOptions: {
+            column: {
+                cursor: 'pointer',
+                point: {
+                    events: {
+                        click: function() {
+                            var drilldown = this.drilldown;
+                            if (drilldown) { // drill down
+                                setChart(drilldown.name, drilldown.categories, drilldown.data, drilldown.color);
+                            } else { // restore
+                                setChart(name, categories, data);
+                            }
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    color: colors[0],
+                    style: {
+                        fontWeight: 'bold'
+                    },
+                    formatter: function() {
+                        return this.y;
+                    }
+                }
+            }
+        },
+        tooltip: {
+            formatter: function() {
+                var point = this.point,
+                    s = this.x +':<b>'+ this.y +'</b><br/>';
+                if (point.drilldown) {
+                    s += 'Click to view '+ point.category +' versions';
+                } else {
+                    s += '点击刷新';
+                }
+                return s;
+            }
+        },
+        series: [{
+            name: name,
+            data: data,
+            color: 'white'
+        }],
+        exporting: {
+            enabled: false
+        }
+    })
+    .highcharts(); // return chart
+
+   }; 
+});	
+
+</script>
+
+{% end %}
+
+{% block content %}
+<div class="container">
+{% if flag==False %}
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>您还没有上传environment.py</strong>
+</div>
+{% end %}
+<div id="container" style="width:auto; height:auto"></div>
+</div>
+
+
+{% end %}
+    

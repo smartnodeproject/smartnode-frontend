@@ -1,0 +1,20 @@
+{% extends "navigator.html" %}
+{% block title %}
+移除设备
+{% end %}
+{% block content %}
+<form method="post">
+ <label class="label label-primary" for="option1">请选择要删除的设备</label>
+  <br>
+  {% for i in name %}
+  <div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-primary ">
+    <input type="checkbox" name="id" value="{{i['id']}}" autocomplete="off" > {{i['mac_name']}}在{{i['mac_position']}}
+  </label>
+  </div>
+    <br>
+ {% end %}
+ <br> <br> <br> <br>
+<button type="submit" class="btn btn-success">提交</button>
+ </form>
+{% end %}
