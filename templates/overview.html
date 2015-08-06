@@ -4,6 +4,17 @@
 {% end %}
 {% block content %}
 {% for i in name %}
-<a href="/machine/{{i['id']}}">{{i['mac_name']}}在{{i['mac_position']}}</a>
+<div class="container">
+<div class="bs-example" data-example-id="contextual-panels">
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 class="panel-title">{{i['mac_position']}}</h3>
+</div>
+<div class="panel-body">
+<a href="/machine/{{i['id']}}"><button type="button" class="btn btn-info"　>{{i['mac_name']}}</button></a>
+</div>
+</div>
+</div>
+</div>
 {% end %}
 {% end %}

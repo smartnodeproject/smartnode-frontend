@@ -1,0 +1,67 @@
+{% extends navigator.html %}
+{% block title %}
+联动
+{% end %}
+{% block content %}
+<div class="container">
+<form method="post">
+<label class="label label-primary"  for="namem1">设备</label>
+<br>
+<div id="namem1" class="btn-group" data-toggle="buttons">
+  {% for i in name1 %}
+<label class="btn btn-primary ">
+    <input type="radio" id="M2M1"  name="M2M1"  value='{{i["id"]}}' autocomplete="off" >{{i['mac_name']}}在{{i['mac_position']}}
+</label>
+{% end %}
+</div>
+
+<br><br><br>
+<label class="label label-success"  for="dom1">谓词</label>
+<div id="dom1" class="btn-group" data-toggle="buttons">
+ {% for i in name3 %}
+ {% for (k,v) in i['control'].items() %}
+<label class="btn btn-info ">
+    <input type="radio" name="M2M3"  value='{{v}}' autocomplete="off" >{{k}}
+</label>
+ {% end %}
+ </br>
+ {% end %}
+</div>
+<br><br><br>
+<label class="label label-warning"  for="whatm">量词</label><br><br>
+    <div id="whatm" class="input-group">
+      <input type="text" id="M2M4" name= "M2M4" class="form-control" placeholder="例如'5s'或'27c'">
+      <span class="input-group-addon" id="basic-addon2">秒 度...</span>
+    </div><!-- /input-group -->
+<br><br>
+
+
+<label class="label label-primary"  for="namem2">设备</label>
+<br>
+<div id="namem2" class="btn-group" data-toggle="buttons">
+{% for j in name2 %}
+<label class="btn btn-primary ">
+    <input type="radio" name="M2M2"  value='{{j["id"]}}' autocomplete="off" >{{j['mac_name']}}在{{j['mac_position']}}
+</label>
+{% end %}
+</div>
+
+
+<br><br><br>
+<label class="label label-success"  for="dom2">谓词</label>
+<div id="dom2" class="btn-group" data-toggle="buttons">
+ {% for i in name5 %}
+ {% for (k,v) in i['control'].items() %}
+<label class="btn btn-info ">
+    <input type="radio" name="M2M5"  value='{{v}}' autocomplete="off" >{{k}}
+</label>
+ {% end %}
+ </br>
+ {% end %}
+</div>
+<br><br><br><br>
+<button type="submit" class="btn-lg btn-success">走起</button>
+</form>
+</div>
+{% end %}
+
