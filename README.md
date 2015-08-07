@@ -8,6 +8,6 @@
 ###run
 * rethinkdb(database:smartnode, table:mac)
 * . venv/bin/activate && python main.py
-### To do
+###To do
 * support MQTT, COAP and XMPP
 * asynchronous
